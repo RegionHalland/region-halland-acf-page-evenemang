@@ -60,6 +60,61 @@ OBS! Justera så att du hämtar aktuell version.
     {!! $data->image !!}<br>
     {{ $data->post_title }}<br>
     {{ $data->ingress }}<br>
+  @endforeach
+@endif
+```
+
+
+## Exempel på hur arrayen ser ut
+
+```sh
+array (size=2)
+  0 => 
+    object(WP_Post)[6833]
+      public 'ID' => int 51
+      public 'post_author' => string '1' (length=1)
+      public 'post_date' => string '2019-06-07 11:28:09' (length=19)
+      public 'post_date_gmt' => string '2019-06-07 09:28:09' (length=19)
+      public 'post_content' => string 'Min första spelning' (length=19)
+      public 'post_title' => string 'Första spelningen' (length=17)
+      public 'post_excerpt' => string '' (length=0)
+      public 'post_status' => string 'publish' (length=7)
+      public 'comment_status' => string 'closed' (length=6)
+      public 'ping_status' => string 'closed' (length=6)
+      public 'post_password' => string '' (length=0)
+      public 'post_name' => string 'forsta-spelningen' (length=3)
+      public 'to_ping' => string '' (length=0)
+      public 'pinged' => string '' (length=0)
+      public 'post_modified' => string '2019-06-07 11:32:40' (length=19)
+      public 'post_modified_gmt' => string '2019-06-07 09:32:40' (length=19)
+      public 'post_content_filtered' => string '' (length=0)
+      public 'post_parent' => int 0
+      public 'guid' => string 'http://exempel.se/evenemang/forsta-spelningen/' (length=46)
+      public 'menu_order' => int 0
+      public 'post_type' => string 'evenemang' (length=9)
+      public 'post_mime_type' => string '' (length=0)
+      public 'comment_count' => string '0' (length=1)
+      public 'filter' => string 'raw' (length=3)
+      public 'url' => string 'http://exempel.se/evenemang/forsta-spelningen' (length=45)
+      public 'image_url' => string 'http://exempel.se/app/uploads/2019/06/hero-d-lopning.jpg' (length=56)
+      public 'date' => string '2019-06-07' (length=10)
+      public 'stad' => string 'Halmstad' (length=8)
+      public 'spelstalle' => string 'Galgberget' (length=10)
+      public 'speltid' => string '2019-06-29 18:30' (length=16)
+      public 'speltid_datum' => string '2019-06-29' (length=10)
+      public 'speltid_tid' => string '18:30' (length=5)
+```
+
+
+## Visa alla kommande events på en sida via "Blade" (med all information)
+
+```sh
+@php($myData = get_region_halland_acf_page_evenemang_kommande_items_all())
+@if(isset($myData))
+  @foreach ($myData as $data)
+    {!! $data->image !!}<br>
+    {{ $data->post_title }}<br>
+    {{ $data->ingress }}<br>
     Information<br>
       @foreach ($data->information as $information)
         @if($information['has_link'])
@@ -74,6 +129,7 @@ OBS! Justera så att du hämtar aktuell version.
       @endforeach
   @endforeach
 @endif
+
 ```
 
 
@@ -147,6 +203,12 @@ array (size=2)
 
 
 ## Versionhistorik
+
+### 1.2.0
+- Funktion för att hämta ut kommande evenemang med all information
+
+### 1.1.0
+- Funktion för att hämta ut kommande evenemang
 
 ### 1.0.0
 - Första version
