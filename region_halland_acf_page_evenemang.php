@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 1.0.0
+	Version: 1.1.0
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -224,7 +224,107 @@
 		endif;
 
 	}
+
+	function get_region_halland_acf_page_evenemang_kommande_items($myAntal = -1) {
+		
+		$date = date("Y-m-d H:i:s");
+		
+		// Preparerar array för att hämta ut nyheter
+		$args = array( 
+			'post_type' => 'evenemang',
+			'posts_per_page' => $myAntal,
+			'meta_key' => 'name_1000154',
+            'orderby' => 'meta_value meta_value_num',
+            'order' => 'DESC',
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'       => 'name_1000154',
+                    'compare'   => '>=',
+                    'value'     => $date,
+                )
+            )
+		);
+
+		// Hämta valda nyheter
+		$myPages = get_posts($args);
+		
+		foreach ($myPages as $page) {
+
+			// Lägg till sidans url 	
+			$page->url = get_permalink($page->ID);
+
+			// Bild
+			$page->image = get_the_post_thumbnail($page->ID);
+			$page->image_url = get_the_post_thumbnail_url($page->ID);
+			
+			// Publicerad datum
+			$page->date = get_the_date('Y-m-d', $page->ID);
+
+			// Ingress
+			$page->ingress = get_field('name_1000148', $page->ID);
+
+			// Stad
+			$page->stad = get_field('name_1000150', $page->ID);
+
+			// Spelställe
+			$page->spelstalle = get_field('name_1000152', $page->ID);
+			
+			// Speltid
+			$page->speltid = get_field('name_1000154', $page->ID);
+			$page->speltid_datum = region_halland_acf_page_evenemang_get_datum($page->speltid);
+			$page->speltid_tid = region_halland_acf_page_evenemang_get_tid($page->speltid);
+
+			// Hämta ACF-objektet för link
+			$information_field_object = get_field('name_1000156', $page->ID);
+			$arrangor_field_object = get_field('name_1000160', $page->ID);
+
+			$page->information = region_halland_acf_page_evenemang_get_link_data($information_field_object, "name_1000158");			
+			$page->arrangor = region_halland_acf_page_evenemang_get_link_data($arrangor_field_object, "name_1000162");
+		
+		}
+
+		// Returnera array med alla poster
+		return $myPages;
+
+	}
 	
+	function region_halland_acf_page_evenemang_get_datum($date) {
+		return substr($date, 0, 10);
+	}
+
+	function region_halland_acf_page_evenemang_get_tid($date) {
+		return substr($date, 11, 5);
+	}
+
+	function region_halland_acf_page_evenemang_get_link_data($page_field_object, $acf_name) {
+		
+		$myData = array();
+        foreach ($page_field_object as $value) {
+	        $arrLink = $value[$acf_name];
+	        if (is_array($arrLink)) {
+		        $intHasLink = 1;
+		        $strLinkTitle = $arrLink['title'];
+		        $strLinkUrl = $arrLink['url'];
+		        $strLinkTarget = $arrLink['target'];
+	        } else {
+		        $intHasLink = 1;
+		        $strLinkTitle = "";
+		        $strLinkUrl = "";
+		        $strLinkTarget = "";
+	        }
+	        array_push($myData, array(
+	           'has_link' => $intHasLink,
+	           'link_title' => $strLinkTitle,
+	           'link_url' => $strLinkUrl,
+	           'link_target' => $strLinkTarget
+	        ));
+        }
+
+		return $myData;
+
+	}
+
 	// Metod som anropas när pluginen aktiveras
 	function region_halland_acf_page_evenemang_activate() {
 		
