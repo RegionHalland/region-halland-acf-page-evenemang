@@ -210,8 +210,7 @@ Evenemangets ingress<br>
 ```
 
 
-
-## Visa aevenemangets ingress på en enskild evenemangs-sida
+## Visa evenemangets ingress på en enskild evenemangs-sida
 
 ```sh
 <div>
