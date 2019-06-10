@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 1.2.0
+	Version: 1.3.0
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -352,6 +352,34 @@
 
 	function region_halland_acf_page_evenemang_get_tid($date) {
 		return substr($date, 11, 5);
+	}
+
+	function get_region_halland_acf_page_evenemang_ingress() {
+		return get_field('name_1000148');		
+	}
+
+	function get_region_halland_acf_page_evenemang_stad() {
+		return get_field('name_1000150');		
+	}
+
+	function get_region_halland_acf_page_evenemang_spelstalle() {
+		return get_field('name_1000152');		
+	}
+
+	function get_region_halland_acf_page_evenemang_speltid() {
+		return get_field('name_1000154');		
+	}
+
+	function get_region_halland_acf_page_evenemang_information() {
+		$field_object = get_field('name_1000156');
+		$myData = region_halland_acf_page_evenemang_get_link_data($field_object, "name_1000158");
+		return $myData;			
+	}
+
+	function get_region_halland_acf_page_evenemang_arrangor() {
+		$field_object = get_field('name_1000160');
+		$myData = region_halland_acf_page_evenemang_get_link_data($field_object, "name_1000162");
+		return $myData;			
 	}
 
 	function region_halland_acf_page_evenemang_get_link_data($page_field_object, $acf_name) {

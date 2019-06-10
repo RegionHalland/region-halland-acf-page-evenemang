@@ -202,7 +202,47 @@ array (size=2)
 ```
 
 
+## Vis aevenemangets ingress på en enskild evenemangs-sida
+
+```sh
+Evenemangets ingress<br>
+{{ get_region_halland_acf_page_evenemang_ingress() }}
+```
+
+
+
+## Visa aevenemangets ingress på en enskild evenemangs-sida
+
+```sh
+<div>
+  <p><strong>Stad:</strong> {{ get_region_halland_acf_page_evenemang_stad() }}
+  <p><strong>Spelställe:</strong> {{ get_region_halland_acf_page_evenemang_spelstalle() }}</p>
+  <p><strong>Speltid:</strong> {{ get_region_halland_acf_page_evenemang_speltid() }}</p>
+  <p><strong>Information:</strong><br>
+    @php($myInformation = get_region_halland_acf_page_evenemang_information())
+      @foreach ($myInformation as $information)
+      @if($information['has_link'])
+        <a href="{{ $information['link_url'] }}" target="{{ $information['link_target'] }}">{{ $information['link_title'] }}</a><br>
+      @endif
+    @endforeach
+  </p>
+  <p><strong>Arrngör:</strong><br>
+    @php($myArrangor = get_region_halland_acf_page_evenemang_arrangor())
+      @foreach ($myArrangor as $arrangor)
+      @if($arrangor['has_link'])
+        <a href="{{ $arrangor['link_url'] }}" target="{{ $arrangor['link_target'] }}">{{ $arrangor['link_title'] }}</a><br>
+      @endif
+    @endforeach
+  </p>
+</div>
+```
+
+
 ## Versionhistorik
+
+### 1.3.0
+- Funktioner för att visa evenemangs-data på en enskild sida
+- View-filen finns även inlagd som exempel
 
 ### 1.2.0
 - Funktion för att hämta ut kommande evenemang med all information
