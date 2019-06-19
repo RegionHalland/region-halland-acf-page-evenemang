@@ -157,6 +157,9 @@ Evenemangets ingress<br>
 
 ## Versionhistorik
 
+### 2.0.1
+- Ändrat sorteringsordning för att hämta ut evenemang, senast först
+
 ### 2.0.0
 - Funktion för att hämta ut all data borttagen
 - Lagt till bild-puff som acf-fält

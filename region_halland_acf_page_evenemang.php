@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 2.0.0
+	Version: 2.0.1
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -274,7 +274,7 @@
 			'posts_per_page' => $myAntal,
 			'meta_key' => 'name_1000154',
             'orderby' => 'meta_value meta_value_num',
-            'order' => 'DESC',
+            'order' => 'ASC',
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
