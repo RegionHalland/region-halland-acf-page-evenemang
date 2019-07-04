@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 2.1.0
+	Version: 2.2.0
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -396,12 +396,20 @@
 
 		// Preparera array
 		$myData = array();
-		$myData['biljett_title'] = $field_object['title'];
-		$myData['biljett_url'] = $field_object['url'];
-		$myData['biljett_target'] = $field_object['target'];
-		if ($field_object['url']) {
-			$myData['biljett_has_link'] = 1;
+
+		if (is_array($field_object)) { 
+			$myData['biljett_title'] = $field_object['title'];
+			$myData['biljett_url'] = $field_object['url'];
+			$myData['biljett_target'] = $field_object['target'];
+			if ($field_object['url']) {
+				$myData['biljett_has_link'] = 1;
+			} else {
+				$myData['biljett_has_link'] = 0;
+			}
 		} else {
+			$myData['biljett_title'] = "";
+			$myData['biljett_url'] = "";
+			$myData['biljett_target'] = "";
 			$myData['biljett_has_link'] = 0;
 		}
 

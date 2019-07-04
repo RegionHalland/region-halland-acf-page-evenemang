@@ -157,6 +157,9 @@ Evenemangets ingress<br>
 
 ## Versionhistorik
 
+### 2.2.0
+- Koll om det finns en biljett på en enskild sida
+
 ### 2.1.0
 - Justerat om ingen biljett är vald
 - Lagt till så att man kan välja antal poster
