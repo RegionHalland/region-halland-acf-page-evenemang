@@ -163,6 +163,9 @@ Evenemangets ingress<br>
 
 ## Versionhistorik
 
+### 2.5.0
+- Lagt till en funktion för att hämta ett enskilt evenemang
+
 ### 2.4.0
 - Koll om det finns en inlagd länk på en enskild sida
 

@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 2.4.0
+	Version: 2.5.0
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -347,6 +347,75 @@
 		
 		// Returnera array med alla poster
 		return $myPages;
+
+	}
+
+		function get_region_halland_acf_page_evenemang_kommande_single() {
+		
+		// Wordpress funktion för aktuell post
+		global $post;
+
+		// ID för aktuell post
+		$myID = $post->ID;
+		
+		// Hämta page information
+		$page = get_post($myID);
+
+		// Lägg till sidans url 	
+		$page->url = get_permalink($page->ID);
+
+		// Bild
+		$page->image = get_the_post_thumbnail($page->ID);
+		$page->image_url = get_the_post_thumbnail_url($page->ID);
+		
+		// Publicerad datum
+		$page->date = get_the_date('Y-m-d', $page->ID);
+
+		// Ingress
+		$page->ingress = get_field('name_1000148', $page->ID);
+
+		// Stad
+		$page->stad = get_field('name_1000150', $page->ID);
+
+		// Spelställe
+		$page->spelstalle = get_field('name_1000152', $page->ID);
+		
+		// Speltid
+		$page->speltid = get_field('name_1000154', $page->ID);
+		$page->speltid_datum = region_halland_acf_page_evenemang_get_datum($page->speltid);
+		$page->speltid_tid = region_halland_acf_page_evenemang_get_tid($page->speltid);
+		
+		// Länk till biljett		
+		$link_field_object = get_field('field_1000163', $page->ID);
+		if (is_array($link_field_object)) {
+			$page->biljett_title = $link_field_object['title'];
+			$page->biljett_link = $link_field_object['url'];
+			$page->biljett_target = $link_field_object['target'];
+			if ($page->biljett_link) {
+				$page->biljett_has_link = 1;
+			} else {
+				$page->biljett_has_link = 0;
+			}
+		} else {
+			$page->biljett_title = "";
+			$page->biljett_link = "";
+			$page->biljett_target = "";
+			$page->biljett_has_link = 0;
+		}
+
+		// Puff-bild
+		$image_field_object = get_field('field_1000165', $page->ID);
+		$page->puff_url = $image_field_object['url'];
+		$page->puff_width = $image_field_object['width'];
+		$page->puff_height = $image_field_object['height'];
+		if ($page->puff_url) {
+			$page->puff_has_url = 1;
+		} else {
+			$page->puff_has_url = 0;
+		}
+		
+		// Returnera enskild post
+		return $page;
 
 	}
 	
