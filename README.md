@@ -151,11 +151,20 @@ Evenemangets ingress<br>
       @endif
     @endforeach
   </p>
+  @php($myImage = get_region_halland_acf_page_evenemang_puff_image())
+  <p>
+  @if($myImage['puff_has_image'] == 1)
+    <img src="{{$myImage['puff_url']}}" width="{{$myImage['puff_width']}}" height="{{$myImage['puff_height']}}">
+  @endif
+  </p>
 </div>
 ```
 
 
 ## Versionhistorik
+
+### 2.3.0
+- Lagt till funktion för att hämta ut en puff-bild
 
 ### 2.2.0
 - Koll om det finns en biljett på en enskild sida
