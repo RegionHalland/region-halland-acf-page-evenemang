@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 2.3.0
+	Version: 2.4.0
 	Author: Roland Hydén
 	License: MIT
 	Text Domain: regionhalland
@@ -435,26 +435,28 @@
 		
 		// Preparera array
 		$myData = array();
-        foreach ($field_object as $value) {
-	        $arrLink = $value[$acf_name];
-	        if (is_array($arrLink)) {
-		        $intHasLink = 1;
-		        $strLinkTitle = $arrLink['title'];
-		        $strLinkUrl = $arrLink['url'];
-		        $strLinkTarget = $arrLink['target'];
-	        } else {
-		        $intHasLink = 1;
-		        $strLinkTitle = "";
-		        $strLinkUrl = "";
-		        $strLinkTarget = "";
+        if (is_array($field_object)) {
+	        foreach ($field_object as $value) {
+		        $arrLink = $value[$acf_name];
+		        if (is_array($arrLink)) {
+			        $intHasLink = 1;
+			        $strLinkTitle = $arrLink['title'];
+			        $strLinkUrl = $arrLink['url'];
+			        $strLinkTarget = $arrLink['target'];
+		        } else {
+			        $intHasLink = 1;
+			        $strLinkTitle = "";
+			        $strLinkUrl = "";
+			        $strLinkTarget = "";
+		        }
+		        array_push($myData, array(
+		           'has_link' => $intHasLink,
+		           'link_title' => $strLinkTitle,
+		           'link_url' => $strLinkUrl,
+		           'link_target' => $strLinkTarget
+		        ));
 	        }
-	        array_push($myData, array(
-	           'has_link' => $intHasLink,
-	           'link_title' => $strLinkTitle,
-	           'link_url' => $strLinkUrl,
-	           'link_target' => $strLinkTarget
-	        ));
-        }
+		}
 
 		// Returnera array
 		return $myData;

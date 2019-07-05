@@ -163,6 +163,9 @@ Evenemangets ingress<br>
 
 ## Versionhistorik
 
+### 2.4.0
+- Koll om det finns en inlagd länk på en enskild sida
+
 ### 2.3.0
 - Lagt till funktion för att hämta ut en puff-bild
 
