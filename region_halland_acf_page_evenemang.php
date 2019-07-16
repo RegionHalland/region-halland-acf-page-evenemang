@@ -6,7 +6,7 @@
 	/*
 	Plugin Name: Region Halland ACF Page Evenemang
 	Description: ACF-fält för extra fält nederst på en evenemangs-sida
-	Version: 2.7.0
+	Version: 2.7.1
 	Author: Roland Hydén
 	License: GPL-3.0
 	Text Domain: regionhalland
