@@ -171,6 +171,9 @@ Evenemangets ingress<br>
 
 ## Versionhistorik
 
+### 2.8.0
+- Alt-text nu tillgänglig i API:et
+
 ### 2.7.1
 - Korrigerat länk till licens-fil
 
