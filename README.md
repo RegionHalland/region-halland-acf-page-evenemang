@@ -114,6 +114,7 @@ array (size=2)
       public 'puff_url' => string 'http://exempel.se/app/uploads/2019/06/hero-i-bygg.jpg' (length=53)
       public 'puff_width' => int 1440
       public 'puff_height' => int 420
+      public 'puff_alt' => string 'Byggare' (length=7)
       public 'puff_has_url' => int 1
 ```
 
@@ -162,7 +163,7 @@ Evenemangets ingress<br>
   @php($myImage = get_region_halland_acf_page_evenemang_puff_image())
   <p>
   @if($myImage['puff_has_image'] == 1)
-    <img src="{{$myImage['puff_url']}}" width="{{$myImage['puff_width']}}" height="{{$myImage['puff_height']}}">
+    <img src="{{$myImage['puff_url']}}" width="{{$myImage['puff_width']}}" height="{{$myImage['puff_height']}}" alt="{{$myImage['puff_alt']}}">
   @endif
   </p>
 </div>
